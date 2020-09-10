@@ -1,20 +1,53 @@
-<ion-header [translucent]="true">
+<ion-header class="toolbar">
   <ion-toolbar>
     <ion-title>
-      Blank
+      <ion-img class="logo" src="/assets/cat.png"></ion-img>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding-top">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>
+        <ion-icon name="bulb"></ion-icon> Cat Fact {{ selectedFact + 1}}
+      </ion-card-subtitle>
+    </ion-card-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <ion-card-content *ngIf="catFacts[selectedFact]">
+      {{ catFacts[selectedFact].text }}
+    </ion-card-content>
+
+    <ion-card-content *ngIf="catFacts[selectedFact]">
+      <div class="fact-meta">
+        <ion-card-subtitle class="ion-text-start">
+          <ion-icon name="person"></ion-icon> {{
+          catFacts[selectedFact].user.name.first + ' ' +
+          catFacts[selectedFact].user.name.last}}
+        </ion-card-subtitle>
+
+        <ion-card-subtitle class="ion-text-end">
+          <ion-icon name="star"></ion-icon>
+          {{ catFacts[selectedFact].upvotes }}
+        </ion-card-subtitle>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <div class="ion-text-center">
+    <ion-button size="small" (click)="decrementSelected()">
+      Previous Fact
+      <ion-ripple-effect></ion-ripple-effect>
+    </ion-button>
+    <ion-button size="small" (click)="incrementSelected()">
+      Next Fact
+      <ion-ripple-effect></ion-ripple-effect>
+    </ion-button>
   </div>
 </ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-toolbar>
+    <ion-title size="small"> If you hate cats, I hate you. </ion-title>
+  </ion-toolbar>
+</ion-footer>
